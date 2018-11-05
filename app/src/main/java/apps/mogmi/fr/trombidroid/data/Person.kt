@@ -13,4 +13,11 @@ data class Person(val arrival : Long = 0,
                   val id : Int = 0,
                   val picture : String = "")  {
 
+    companion object {
+        const val BASE_URL = "https://trombi.mogmi.fr"
+    }
+
+    val pictureUrl: String
+        get() = BASE_URL.plus(picture)
+
 }
