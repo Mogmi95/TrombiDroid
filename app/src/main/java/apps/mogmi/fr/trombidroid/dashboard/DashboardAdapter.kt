@@ -7,6 +7,7 @@ import apps.mogmi.fr.trombidroid.data.Person
 class DashboardAdapter : RecyclerView.Adapter<DashboardAdapter.PersonHolder>() {
 
     private val persons: ArrayList<Person> = ArrayList()
+    var listener: Listener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PersonHolder {
         val view = PersonItemView(parent.context).apply {
@@ -14,6 +15,11 @@ class DashboardAdapter : RecyclerView.Adapter<DashboardAdapter.PersonHolder>() {
                     RecyclerView.LayoutParams.MATCH_PARENT,
                     RecyclerView.LayoutParams.WRAP_CONTENT
             )
+        }
+        view.listener = object: PersonItemView.Listener {
+            override fun onPersonSelected(person: Person) {
+                listener?.onPersonSelected(person)
+            }
         }
         return PersonHolder(view)
     }
@@ -33,4 +39,12 @@ class DashboardAdapter : RecyclerView.Adapter<DashboardAdapter.PersonHolder>() {
     }
 
     class PersonHolder(val view: PersonItemView) : RecyclerView.ViewHolder(view)
+
+    interface Listener {
+
+        /**
+         * The user selected a [person]
+         */
+        fun onPersonSelected(person: Person)
+    }
 }

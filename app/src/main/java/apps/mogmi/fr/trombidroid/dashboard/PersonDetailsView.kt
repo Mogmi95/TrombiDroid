@@ -6,13 +6,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.widget.FrameLayout
 import apps.mogmi.fr.trombidroid.R
-import apps.mogmi.fr.trombidroid.R.id.person_item_view_avatar
-import apps.mogmi.fr.trombidroid.R.id.person_item_view_name
 import apps.mogmi.fr.trombidroid.data.Person
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.person_details_view.view.*
 import kotlinx.android.synthetic.main.person_item_view.view.*
 
-class PersonItemView @JvmOverloads constructor(
+class PersonDetailsView @JvmOverloads constructor(
         context: Context,
         attrs: AttributeSet? = null,
         defStyle: Int = 0,
@@ -22,18 +21,18 @@ class PersonItemView @JvmOverloads constructor(
     var listener: Listener? = null
 
     init {
-        LayoutInflater.from(context).inflate(R.layout.person_item_view, this)
+        LayoutInflater.from(context).inflate(R.layout.person_details_view, this)
 
         setOnClickListener {
-            viewModel?.let { listener?.onPersonSelected(it) }
+            listener?.onQuitDetails()
         }
     }
 
     var viewModel: Person? = null
         set(value) {
             value?.let {
-                Picasso.get().load(value.pictureUrl).into(person_item_view_avatar)
-                person_item_view_name.text = value.name
+                Picasso.get().load(value.pictureUrl).into(person_details_view_avatar)
+                person_details_view_name.text = value.name
             }
             field = value
         }
@@ -41,9 +40,9 @@ class PersonItemView @JvmOverloads constructor(
     interface Listener {
 
         /**
-         * The user selected a [person]
+         * The user requested to exit the detailed view
          */
-        fun onPersonSelected(person: Person)
+        fun onQuitDetails()
     }
 }
 

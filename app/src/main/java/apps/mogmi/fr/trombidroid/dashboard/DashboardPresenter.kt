@@ -35,7 +35,7 @@ class DashboardPresenter : DashboardContract.Presenter {
         this.view = view
     }
 
-    public override fun requestUpdate() {
+    override fun requestUpdate() {
         val customType = object : TypeToken<List<Person>>() {}.type
         // val persons = Gson().fromJson<List<Person>>(json, customType)
         // view?.displayPersons(persons)
@@ -60,6 +60,10 @@ class DashboardPresenter : DashboardContract.Presenter {
             }
 
         })
+    }
+
+    override fun requestPersonDetails(person: Person) {
+        view?.displayPerson(person)
     }
 
 }
