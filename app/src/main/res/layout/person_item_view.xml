@@ -10,7 +10,7 @@
     <ImageView
         android:id="@+id/person_item_view_avatar"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="200dp"
         android:scaleType="centerCrop"
         android:clickable="false"
         tools:src="@mipmap/ic_launcher" />

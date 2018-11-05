@@ -1,6 +1,7 @@
 package apps.mogmi.fr.trombidroid.dashboard
 
 import android.content.Context
+import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.util.AttributeSet
 import android.view.LayoutInflater
@@ -29,7 +30,7 @@ class DashboardView @JvmOverloads constructor(
         adapter = DashboardAdapter()
 
         dashboard_view_recycler_view.apply {
-            layoutManager = LinearLayoutManager(context)
+            layoutManager = GridLayoutManager(context, 2)
             adapter = this@DashboardView.adapter
         }
 
