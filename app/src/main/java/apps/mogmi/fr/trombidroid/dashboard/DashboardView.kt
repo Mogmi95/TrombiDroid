@@ -10,6 +10,7 @@ import android.widget.LinearLayout
 import apps.mogmi.fr.trombidroid.R
 import apps.mogmi.fr.trombidroid.R.id.dashboard_view_recycler_view
 import apps.mogmi.fr.trombidroid.data.Person
+import apps.mogmi.fr.trombidroid.personinfo.PersonInfoActivity
 import kotlinx.android.synthetic.main.dashboard.view.*
 import java.security.AccessController.getContext
 
@@ -52,15 +53,6 @@ class DashboardView @JvmOverloads constructor(
     }
 
     override fun displayPerson(person: Person) {
-        val view = PersonDetailsView(context).apply {
-            layoutParams = FrameLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
-        }
-        addView(view)
-        view.listener = object : PersonDetailsView.Listener {
-            override fun onQuitDetails() {
-                removeView(view)
-            }
-        }
-        view.viewModel = person
+        PersonInfoActivity.startActivity(context, person.id)
     }
 }
